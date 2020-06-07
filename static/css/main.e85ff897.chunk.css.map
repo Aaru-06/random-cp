@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,WACI,qBACJ,CAEA,aACI,aACJ,CAEA,mBACI,SACJ","file":"main.e85ff897.chunk.css","sourcesContent":[".container{\r\n    background-color : grey;\r\n}\r\n\r\n.problemLink{\r\n    color : darkblue;\r\n}\r\n\r\n.problemLink:hover{\r\n    color : red;\r\n}\r\n"]}
