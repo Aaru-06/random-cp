@@ -25,6 +25,7 @@ function App(props){
                     loading = {props.data.loading}
                     tags = {props.data.tags}
                     selectedTag = {props.data.selectedTag}
+                    randomTopic = {props.data.randomTopic}
                 />
                 <Display 
                     enableDisplay = {props.data.enableDisplay}

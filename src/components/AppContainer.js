@@ -16,7 +16,8 @@ class AppContainer extends Component{
             approxRating : 1000,
             enableDisplay : false,
             tags : undefined,
-            selectedTag : undefined
+            selectedTag : undefined,
+            randomTopic : false
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -37,21 +38,25 @@ class AppContainer extends Component{
         const {name,value,type,checked} = event.target
 
         let nextState = {
-            handle : undefined,
-            rating : undefined,
             currentProblem : undefined,
             enableDisplay : false,
             approxRating : 1000        
         };
 
-        if (type==="checkbox"){
+        if (name==="handleDisable"){
             nextState.handleDisable = checked
+            nextState.handle = undefined
+            nextState.rating = undefined
         }
         else if (type==="text"){
             nextState.handle = value
+            nextState.rating = undefined
         }
         else if(name==="tags"){
             nextState.selectedTag = value
+        }
+        else if(name==="randomTopic"){
+            nextState.randomTopic = checked
         }
 
         this.setState(nextState)
@@ -112,7 +117,7 @@ class AppContainer extends Component{
                 })
 
                 let tagSet = new Set()
-                data.result.problems.map(obj=>{obj.tags.forEach(tagSet.add,tagSet)})
+                data.result.problems.map(obj=>{obj.tags.forEach(tagSet.add,tagSet);return null;})
 
                 let tagList = Array.from(tagSet)
 
@@ -132,12 +137,14 @@ class AppContainer extends Component{
                 //console.log("fetch called with rating ",this.state.approxRating)
                 
                 let filteredProblems = this.state.problems.result.problems.filter(obj => this.state.approxRating===obj.rating ? true : false)
-                let tagselected = this.state.selectedTag
-                filteredProblems = filteredProblems.filter(obj => obj.tags.includes(tagselected))
-                
-                if(filteredProblems.length===0){
-                    window.alert("Sorry. We couldn't find problems based on "+tagselected+" for "+this.state.approxRating+" rating")
-                    return
+                if(!this.state.randomTopic)
+                {
+                    let tagselected = this.state.selectedTag
+                    filteredProblems = filteredProblems.filter(obj => obj.tags.includes(tagselected))
+                    if(filteredProblems.length===0){
+                        window.alert("Sorry. We couldn't find problems based on "+tagselected+" for "+this.state.approxRating+" rating")
+                        return
+                    }
                 }
                 const lengthOfFilteredProblems = filteredProblems.length
                 

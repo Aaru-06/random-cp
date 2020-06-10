@@ -39,9 +39,21 @@ class Handle extends Component{
                 <select 
                     name="tags" 
                     value={this.props.selectedTag}
-                    disabled={this.props.loading}
+                    disabled={this.props.loading||this.props.randomTopic}
                     onChange={this.props.handleChange}
+                    style ={{margin : 10}}
                 >{options}</select>
+                <br/>
+                <label>
+                    <input
+                        type="checkbox"
+                        name="randomTopic"
+                        checked={this.props.randomTopic}
+                        onChange = {this.props.handleChange}
+                    />
+                    Give me problems on random topics
+                </label>
+                <br/>
                 <button 
                     type="button" 
                     name="fetchbtn"
