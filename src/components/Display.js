@@ -14,19 +14,26 @@ class Display extends Component{
     render(){
         
         let styles = {display : this.props.enableDisplay?"block":"none"}
+        let innerstyles = {display : (this.props.enableDisplay||this.props.handleDisable)?"block":"none"}
 
         return (
+            <div>
             <div style={styles} >
                 <h1 
                     style={{
                         display : this.props.rating?"block":"none" 
                     }}
                 >Your rating  : {this.props.rating}</h1>
-                <h1>
-                    <button type="button" name="sub" onClick={this.props.approxRatingChanger}>-</button>
-                    &nbsp;Suggested rating of problem : {this.props.approxRating}&nbsp;
-                    <button type="button" name="add" onClick={this.props.approxRatingChanger}>+</button>
-                </h1>
+            </div>
+                <div style = {innerstyles}>
+                    <h1>Suggested rating of problem</h1>
+                    <div>
+                        <button type="button" name="sub" onClick={this.props.approxRatingChanger} className="btn-rating">-</button>
+                        <span><strong>&nbsp; {this.props.approxRating}&nbsp;</strong></span>
+                        <button type="button" name="add" onClick={this.props.approxRatingChanger} className="btn-rating">+</button>
+                    </div>
+                </div>
+            <div style={styles}>
                 <div
                     style = {{
                         display : this.props.rating?"block":"none"
@@ -37,6 +44,7 @@ class Display extends Component{
                     <a 
                         className = "problemLink"
                         href={this.props.problemLink}
+                        rel = "noopener noreferrer"
                         target="_blank"
                     >
                         <strong>
@@ -44,6 +52,7 @@ class Display extends Component{
                         </strong>
                     </a>
                 </div>
+            </div>
             </div>
         )
     }

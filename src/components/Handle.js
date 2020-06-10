@@ -8,6 +8,13 @@ class Handle extends Component{
             border : "double"
         }
 
+        // console.log(this.props)
+        // console.log("tags : ",this.props.tags)
+        let options = undefined
+        if(this.props.tags)
+            options = this.props.tags.map((obj,index) => {return (<option value = {obj} key={index}>{obj}</option>)})
+        // console.log(options)
+
         return(
             <div>
                 <input 
@@ -29,9 +36,12 @@ class Handle extends Component{
                     I won't share my handle.!
                 </label>
                 <br />
-                {/* <select name="tags" value={this.props.selectedTag}>
-                    {this.props.tags.map(obj => {<option value="obj">obj</option>})}
-                </select> */}
+                <select 
+                    name="tags" 
+                    value={this.props.selectedTag}
+                    disabled={this.props.loading}
+                    onChange={this.props.handleChange}
+                >{options}</select>
                 <button 
                     type="button" 
                     name="fetchbtn"
